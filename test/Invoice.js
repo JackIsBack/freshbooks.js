@@ -32,6 +32,19 @@ describe('Invoice', function() {
       });
     });
   });
+  
+  describe("update()", function() {
+    it("should update an invoice with 2 bytes (or more) chars", function(done) {
+      var invoiceId = invoice.invoice_id;
+
+      var updatingInvoice = new freshbooks.Invoice();
+      updatingInvoice.invoice_id = invoiceId;
+      updatingInvoice.notes = "!?%€$ éèîàü  ﷰ Подтверждение 賬戶驗證";
+      updatingInvoice.update(function(err, invoice) {
+        done(err);
+      });
+    });
+  });
 
   describe("get()", function() {
     it("should get an invoice", function(done) {
